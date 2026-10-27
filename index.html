@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoHub · 算法学习中心</title>
+  <meta name="description" content="算法学习一站式平台：刷题平台导航、讲解视频、错题本、学习进度追踪">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+
+  <!-- ===== 顶部导航 ===== -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo">A</div>
+      <span class="nav-brand-text">AlgoHub</span>
+    </div>
+    <div class="nav-menu" id="navMenu">
+      <a class="nav-link active" data-page="home">首页</a>
+      <a class="nav-link" data-page="platforms">刷题平台</a>
+      <a class="nav-link" data-page="learning">学习资源</a>
+      <a class="nav-link" data-page="videos">视频教程</a>
+      <a class="nav-link" data-page="wrongbook">错题本</a>
+      <a class="nav-link" data-page="progress">学习进度</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" title="切换主题">🌙</button>
+      <button class="icon-btn" id="exportBtn" title="导出数据">💾</button>
+    </div>
+  </nav>
+
+  <div class="main-container">
+
+    <!-- ===== 首页 ===== -->
+    <section class="page-section active" id="page-home">
+      <div class="hero">
+        <h1 class="hero-title">
+          算法学习 <span class="gradient-text">一站式中心</span>
+        </h1>
+        <p class="hero-subtitle">
+          汇集主流刷题平台、优质学习资源与讲解视频，搭配错题本与进度追踪，
+          助你系统化攻克算法与数据结构。
+        </p>
+        <div class="hero-stats" id="heroStats">
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="statPlatforms">0</div>
+            <div class="hero-stat-label">收录平台</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="statVideos">0</div>
+            <div class="hero-stat-label">讲解视频</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="statWrong">0</div>
+            <div class="hero-stat-label">错题收录</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="statCheckin">0</div>
+            <div class="hero-stat-label">连续打卡</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 算法分类导航 -->
+      <div class="section-header" style="margin-top: 40px;">
+        <h2 class="section-title">📚 <span class="title-accent">算法知识图谱</span></h2>
+        <p class="section-subtitle">点击分类快速跳转到对应学习资源</p>
+      </div>
+      <div class="algo-nav" id="algoNav"></div>
+
+      <!-- 统计面板 -->
+      <div class="section-header" style="margin-top: 36px;">
+        <h2 class="section-title">📊 <span class="title-accent">学习概览</span></h2>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <!-- 快捷入口 -->
+      <div class="section-header" style="margin-top: 36px;">
+        <h2 class="section-title">⚡ <span class="title-accent">快捷入口</span></h2>
+      </div>
+      <div class="card-grid" id="quickAccess"></div>
+    </section>
+
+    <!-- ===== 刷题平台 ===== -->
+    <section class="page-section" id="page-platforms">
+      <div class="section-header">
+        <h2 class="section-title">🏆 <span class="title-accent">刷题平台</span></h2>
+        <p class="section-subtitle">主流在线判题平台，按难度与特色分类</p>
+      </div>
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="platformSearch" placeholder="搜索平台名称或描述...">
+        </div>
+        <div class="filter-chips" id="platformFilters"></div>
+      </div>
+      <div class="card-grid" id="platformGrid"></div>
+    </section>
+
+    <!-- ===== 学习资源 ===== -->
+    <section class="page-section" id="page-learning">
+      <div class="section-header">
+        <h2 class="section-title">📖 <span class="title-accent">学习资源</span></h2>
+        <p class="section-subtitle">教程文档、书籍、博客与开源仓库</p>
+      </div>
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="learningSearch" placeholder="搜索学习资源...">
+        </div>
+        <div class="filter-chips" id="learningFilters"></div>
+      </div>
+      <div class="card-grid" id="learningGrid"></div>
+    </section>
+
+    <!-- ===== 视频教程 ===== -->
+    <section class="page-section" id="page-videos">
+      <div class="section-header">
+        <h2 class="section-title">🎬 <span class="title-accent">视频教程</span></h2>
+        <p class="section-subtitle">优质算法讲解视频，覆盖基础到进阶</p>
+      </div>
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="videoSearch" placeholder="搜索视频标题或讲师...">
+        </div>
+        <div class="filter-chips" id="videoFilters"></div>
+      </div>
+      <div class="card-grid" id="videoGrid"></div>
+    </section>
+
+    <!-- ===== 错题本 ===== -->
+    <section class="page-section" id="page-wrongbook">
+      <div class="section-header">
+        <h2 class="section-title">📝 <span class="title-accent">错题本</span></h2>
+        <p class="section-subtitle">记录错题链接、原因、自己的代码与最优解法</p>
+      </div>
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="wrongSearch" placeholder="搜索错题标题或标签...">
+        </div>
+        <div class="filter-chips" id="wrongFilters"></div>
+        <button class="btn btn-primary" id="addWrongBtn">
+          <span>＋</span> 添加错题
+        </button>
+      </div>
+      <div class="wrongbook-list" id="wrongList"></div>
+    </section>
+
+    <!-- ===== 学习进度 ===== -->
+    <section class="page-section" id="page-progress">
+      <div class="section-header">
+        <h2 class="section-title">📈 <span class="title-accent">学习进度</span></h2>
+        <p class="section-subtitle">追踪各算法专题掌握情况与每日打卡</p>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn btn-primary" id="checkinBtn">
+          <span>✓</span> 今日打卡
+        </button>
+        <button class="btn btn-secondary" id="resetProgressBtn">
+          <span>↺</span> 重置进度
+        </button>
+      </div>
+
+      <div class="progress-overview" id="progressOverview"></div>
+
+      <div class="section-header" style="margin-top: 32px;">
+        <h3 class="section-title" style="font-size: 20px;">📅 打卡日历（近 28 天）</h3>
+      </div>
+      <div class="progress-card">
+        <div class="checkin-calendar" id="checkinCalendar"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== 错题添加/编辑模态框 ===== -->
+  <div class="modal-overlay" id="wrongModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="wrongModalTitle">添加错题</h3>
+        <button class="modal-close" id="wrongModalClose">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">题目标题 <span class="required">*</span></label>
+          <input type="text" class="form-input" id="wrongTitle" placeholder="例如：两数之和 / LeetCode 1">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">题目链接 <span class="required">*</span></label>
+            <input type="url" class="form-input" id="wrongLink" placeholder="https://leetcode.cn/problems/...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">来源平台</label>
+            <select class="form-select" id="wrongPlatform">
+              <option value="">选择平台</option>
+              <option value="LeetCode">LeetCode</option>
+              <option value="力扣">力扣</option>
+              <option value="Codeforces">Codeforces</option>
+              <option value="洛谷">洛谷</option>
+              <option value="AcWing">AcWing</option>
+              <option value="牛客网">牛客网</option>
+              <option value="AtCoder">AtCoder</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">难度</label>
+            <select class="form-select" id="wrongDifficulty">
+              <option value="简单">简单</option>
+              <option value="中等" selected>中等</option>
+              <option value="困难">困难</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">算法分类</label>
+            <select class="form-select" id="wrongCategory">
+              <option value="数组">数组</option>
+              <option value="链表">链表</option>
+              <option value="树">树</option>
+              <option value="图">图</option>
+              <option value="动态规划">动态规划</option>
+              <option value="贪心">贪心</option>
+              <option value="回溯">回溯</option>
+              <option value="二分查找">二分查找</option>
+              <option value="排序">排序</option>
+              <option value="字符串">字符串</option>
+              <option value="哈希表">哈希表</option>
+              <option value="栈与队列">栈与队列</option>
+              <option value="位运算">位运算</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">错题原因 <span class="required">*</span></label>
+          <textarea class="form-textarea" id="wrongReason" placeholder="详细描述出错的原因：思路偏差？边界条件？时间复杂度？"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">自己的代码</label>
+          <textarea class="form-textarea code-area" id="wrongMyCode" placeholder="粘贴你提交的代码（可留空）"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">最优解法</label>
+          <textarea class="form-textarea code-area" id="wrongOptimalCode" placeholder="粘贴参考的最优解法（可留空）"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">备注</label>
+          <input type="text" class="form-input" id="wrongNote" placeholder="补充说明（可选）">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="wrongCancelBtn">取消</button>
+        <button class="btn btn-primary" id="wrongSaveBtn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 视频播放模态框 ===== -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal" style="max-width: 880px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="videoModalTitle">视频</h3>
+        <button class="modal-close" id="videoModalClose">×</button>
+      </div>
+      <div class="modal-body" id="videoModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== Toast 容器 ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
